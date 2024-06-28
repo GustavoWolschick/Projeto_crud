@@ -8,7 +8,8 @@ $sexo = $_POST['sexo'];
 $fone = $_POST['fone'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
-$usuario->registrar($nome, $sexo, $fone, $email, $senha);
+$adm = 0;
+$usuario->registrar($nome, $sexo, $fone, $email, $senha, $adm);
 header('Location: portal.php');
 exit();
 }

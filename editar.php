@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario_id'])) {
-    header('Location: index.php');
+    header('Location: login.php');
     exit();
 }
 include_once './config/config.php';
@@ -9,13 +9,18 @@ include_once './classes/Usuario.php';
 
 
 $usuario = new Usuario($db);
+$dados_usuario = $usuario->lerPorId($_SESSION['usuario_id']);
+$usuario_adm = $dados_usuario['adm'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
     $nome = $_POST['nome'];
     $sexo = $_POST['sexo'];
     $fone = $_POST['fone'];
     $email = $_POST['email'];
-    $usuario->atualizar($id, $nome, $sexo, $fone, $email);
+    $adm = isset($_POST['adm']) ?  1 : 0; // 1 = verdadeiro, 0 = falso
+
+    $usuario->atualizar($id, $nome, $sexo, $fone, $email, $adm);
     header('Location: portal.php');
     exit();
 }
@@ -34,6 +39,11 @@ if (isset($_GET['id'])) {
     <h1>Editar Usuário</h1>
     <form method="POST">
         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+        <?php if ($usuario_adm == 1): ?>
+            <label for="adm">Administrador</label>
+            <input type="checkbox" id="adm" name="adm" value="1" <?php echo ($row['adm'] == 1) ? 'checked' : ''; ?>>
+            <br><br>
+        <?php endif; ?>     
         <label for="nome">Nome:</label>
         <input type="text" name="nome" value="<?php echo $row['nome']; ?>" required>
         <br><br>
