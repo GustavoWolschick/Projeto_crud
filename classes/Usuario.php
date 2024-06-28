@@ -7,14 +7,13 @@ class Usuario {
     public function __construct($db) {
         $this->conn = $db;
     }
-    public function registrar($nome, $sexo, $fone, $email, $senha) {
-        $query = "INSERT INTO " . $this->table_name . " (nome, sexo, fone, email, senha) VALUES (?, ?, ?, ?, ?)";
+    public function registrar($nome, $sexo, $fone, $email, $senha, $adm) {
+        $query = "INSERT INTO " . $this->table_name . " (nome, sexo, fone, email, senha, adm) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
         $hashed_password = password_hash($senha, PASSWORD_BCRYPT);
-        $stmt->execute([$nome, $sexo, $fone, $email, $hashed_password]);
+        $stmt->execute([$nome, $sexo, $fone, $email, $hashed_password, $adm]);
         return $stmt;
     }
-
 
     public function login($email, $senha) {
         $query = "SELECT * FROM " . $this->table_name . " WHERE email = ?";
@@ -41,10 +40,10 @@ class Usuario {
     }
 
 
-    public function atualizar($id, $nome, $sexo, $fone, $email) {
-        $query = "UPDATE " . $this->table_name . " SET nome = ?, sexo = ?, fone = ?, email = ? WHERE id = ?"; 
+    public function atualizar($id, $nome, $sexo, $fone, $email, $adm) {
+        $query = "UPDATE " . $this->table_name . " SET nome = ?, sexo = ?, fone = ?, email = ?, adm = ? WHERE id = ?"; 
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$nome, $sexo, $fone, $email, $id]);
+        $stmt->execute([$nome, $sexo, $fone, $email, $adm, $id]);
         return $stmt; 
     }
 

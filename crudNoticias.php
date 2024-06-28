@@ -2,7 +2,7 @@
 session_start();
 include_once './config/config.php';
 include_once './classes/Noticias.php';
-
+include_once './classes/Usuario.php';
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
@@ -10,22 +10,19 @@ if (!isset($_SESSION['usuario_id'])) {
     exit();
 }
 $usuario = new Usuario($db);
+$noticias = new Noticia($db);
 
-
-// Processar exclusão de usuário
-if (isset($_GET['deletar'])) {
-    $id = $_GET['deletar'];
-    $usuario->deletar($id);
-    header('Location: portal.php');
-    exit();
-}
 // Obter dados do usuário logado
 $dados_usuario = $usuario->lerPorId($_SESSION['usuario_id']);
 $nome_usuario = $dados_usuario['nome'];
-// Obter dados dos usuários
-$dados = $usuario->ler();
+$adm = $dados_usuario['adm'];
+
+// Obter dados da notícia
+$dados_noticia = $noticias->lerPorId($_SESSION['usuario_id']);
+
 // Função para determinar a saudação
-function saudacao() {
+function saudacao()
+{
     $hora = date('H');
     if ($hora >= 6 && $hora < 12) {
         return "Bom dia";
@@ -35,39 +32,64 @@ function saudacao() {
         return "Boa noite";
     }
 }
+
+// Registrar a noticia
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id_usu = $dados_usuario['id'];
+    $data = date('Y-m-d');
+    $titulo = $_POST['titulo'];
+    $noticia = $_POST['noticia'];
+    $noticias->criar($id_usu, $data, $titulo, $noticia);
+    header('Location: portal.php');
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Portal</title>
+    <title>Crie sua notícia</title>
 </head>
+
 <body>
     <h1><?php echo saudacao() . ", " . $nome_usuario; ?>!</h1>
-    <a href="registrar.php">Adicionar Usuário</a>
+    <a href="portal.php">Ir para o Portal</a>
     <a href="logout.php">Logout</a>
-<br>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Sexo</th>
-            <th>Fone</th>
-            <th>Email</th>
-            <th>Ações</th>
-        </tr>
-        <?php while ($row = $dados->fetch(PDO::FETCH_ASSOC)) : ?>
-            <tr>
-                <td><?php echo $row['id']; ?></td>
-                <td><?php echo $row['nome']; ?></td>
-                <td><?php echo ($row['sexo'] === 'M') ? 'Masculino' : 'Feminino'; ?></td>
-                <td><?php echo $row['fone']; ?></td>
-                <td><?php echo $row['email']; ?></td>
-                <td>
-                    <a href="editar.php?id=<?php echo $row['id']; ?>">Editar</a>
-                    <a href="deletar.php?id=<?php echo $row['id']; ?>">Deletar</a>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
-</body> </html>
+    <br>
+
+    <h2>Criar Notícia</h2>
+    <form method='POST'>
+        <label for='titulo'> titulo:</label>
+        <input type='text' name='titulo' required>
+        <br><br>
+        <label for='noticia'>Noticia:</label>
+        <br><br>
+        <textarea type='text' name='noticia' required></textarea>
+        <br><br>
+        <input type='submit' value='Criar Noticia'>
+    </form>
+
+    
+    <?php while ($jornal = $dados_noticia->fetch(PDO::FETCH_ASSOC)) : ?>
+        <div class="noticia">
+            <h3><?php echo $jornal['titulo']; ?></h3>
+            <p><?php echo $jornal['noticia']; ?></p>
+            <p><strong>Data:</strong> <?php echo date('d/m/Y', strtotime($jornal['data'])); ?></p>
+            <?php
+
+            $autor = $usuario->lerPorId($jornal['id_usu']);
+            if ($autor) {
+                echo "<p><strong>Autor:</strong> " . $autor['nome'] . "</p>";
+            }
+            ?>
+                <?php if ($adm || $jornal['id_usu'] == $_SESSION['usuario_id']) : ?>
+                    <a href="deletar_noticia.php?id=<?php echo $jornal['id'] ?>">Deletar</a>
+                <?php endif; ?>
+            </form>
+        </div>
+    <?php endwhile; ?>
+</body>
+
+</html>

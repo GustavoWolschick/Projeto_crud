@@ -1,5 +1,5 @@
 <?php
-class Noticias {
+class Noticia {
     private $conn;
     private $table_name = "noticias";
 
@@ -21,10 +21,11 @@ class Noticias {
         return $stmt; 
     } 
     public function lerPorId($id_usu) {
+
         $query = "SELECT * FROM " . $this->table_name . " WHERE id_usu = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$id_usu]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
     }
 
     public function deletar($id) {
