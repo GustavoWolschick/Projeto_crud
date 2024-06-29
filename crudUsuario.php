@@ -19,11 +19,18 @@ if (isset($_GET['deletar'])) {
     header('Location: portal.php');
     exit();
 }
+
+// Obter parâmetros de pesquisa e filtros
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$order_by = isset($_GET['order_by']) ? $_GET['order_by'] : '';
+
+// Obter dados dos usuários com filtros
+$dados = $usuario->ler($search, $order_by);
+
 // Obter dados do usuário logado
 $dados_usuario = $usuario->lerPorId($_SESSION['usuario_id']);
 $nome_usuario = $dados_usuario['nome'];
-// Obter dados dos usuários
-$dados = $usuario->ler();
+
 // Função para determinar a saudação
 function saudacao() {
     $hora = date('H');
@@ -47,6 +54,19 @@ function saudacao() {
     <a href="registrar.php">Adicionar Usuário</a>
     <a href="logout.php">Logout</a>
 <br>
+ <form method="GET">
+            <input type="text" name="search" placeholder="Pesquisar por nome ou email" value="<?php echo htmlspecialchars($search); ?>">
+            <label>
+                <input type="radio" name="order_by" value="" <?php if ($order_by == '') echo 'checked'; ?>> Normal
+            </label>
+            <label>
+                <input type="radio" name="order_by" value="nome" <?php if ($order_by == 'nome') echo 'checked'; ?>> Ordem Alfabética
+            </label>
+            <label>
+                <input type="radio" name="order_by" value="sexo" <?php if ($order_by == 'sexo') echo 'checked'; ?>> Sexo
+            </label>
+            <button type="submit">Pesquisar</button>
+        </form>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -70,4 +90,5 @@ function saudacao() {
             </tr>
         <?php endwhile; ?>
     </table>
+    
 </body> </html>
