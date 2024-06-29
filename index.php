@@ -1,15 +1,16 @@
 <?php
 include_once './classes/Usuario.php';
 include_once './classes/Noticias.php';
+include_once './config/config.php';
 
 $usuario = new Usuario($db);
 $noticias = new Noticia($db);
 
-// Obter dados do usuário logado
-$dados_usuario = $usuario->lerPorId($_SESSION['usuario_id']);
+// Obter parâmetros de pesquisa e filtros
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 
-// Obter dados da notícia
-$dados_noticia = $noticias->ler();
+// Obter dados da notícia com filtro
+$dados_noticia = $noticias->ler($search);
 
 // Função para determinar a saudação
 function saudacao() {
@@ -32,7 +33,12 @@ function saudacao() {
 <body>
     <h1><?php echo saudacao(); ?>!</h1>
     <a href="login.php">logar</a>
+    <a href="./registrar.php">Registre-se aqui</a></p>
 <br>
+<form method="GET">
+            <input type="text" name="search" placeholder="Pesquisar por titulo ou descrição" value="<?php echo htmlspecialchars($search); ?>">
+            <button type="submit">Pesquisar</button>
+        </form>
 <?php while ($jornal = $dados_noticia->fetch(PDO::FETCH_ASSOC)) : ?>
         <div class="noticia">
             <h3><?php echo $jornal['titulo']; ?></h3>
@@ -45,9 +51,7 @@ function saudacao() {
                 echo "<p><strong>Autor:</strong> " . $autor['nome'] . "</p>";
             }
             ?>
-                <?php if ($usuario_adm || $jornal['id_usu'] == $_SESSION['usuario_id']) : ?>
-                    <a href="deletar_noticia.php?id=<?php echo $jornal['id'] ?>">Deletar</a>
-                <?php endif; ?>
+               
             </form>
         </div>
     <?php endwhile; ?>
