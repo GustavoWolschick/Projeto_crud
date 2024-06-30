@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <br><br>
                 <input type="submit" name="login" value="Login">
             </form>
+           <p><a href="./solicitar_recuperacao.php">redefinir senha</a></p>
             <p>Não tem uma conta? <a href="./registrar.php">Registre-se aqui</a></p>
             <div class="mensagem">
                 <?php if (isset($mensagem_erro)) echo '<p>' . $mensagem_erro . '</p>'; ?>

@@ -17,6 +17,9 @@ $dados_usuario = $usuario->lerPorId($_SESSION['usuario_id']);
 $nome_usuario = $dados_usuario['nome'];
 $adm = $dados_usuario['adm'];
 
+// Obter parâmetros de pesquisa e filtros
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
 // Obter dados da notícia
 if ($adm == 1) {
     $dados_noticia = $noticias->ler(($search));
@@ -96,8 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             ?>
             <?php if ($adm || $jornal['id_usu'] == $_SESSION['usuario_id']) : ?>
-                <a href="deletar_noticia.php?id=<?php echo $jornal['id'] ?>">Deletar</a>
                 <a href="editar_noticia.php?id=<?php echo $jornal['id'] ?>">Editar</a>
+                <a href="deletar_noticia.php?id=<?php echo $jornal['id'] ?>">Deletar</a>
             <?php endif; ?>
             </form>
         </div>
