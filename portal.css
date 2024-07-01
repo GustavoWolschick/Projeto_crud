@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    min-height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+header {
+    background-color: red;
+    padding: 15px;
+    display: flex;
+}
+
+header h2 {
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+}
+
+header a {
+    text-decoration: none;
+    transition: 0.2s;
+    cursor: pointer;
+    color: black;
+    font-size: 20px;
+}
+
+header .acesso {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    margin-left: auto;
+}
+
+.container {
+    text-align: center;
+    width: 90%;
+    padding: 30px;
+    border-width: 3px;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    margin: 30px auto;
+    background-color: white;
+    z-index: 1;
+    border-color: black;
+    border-style: solid;
+}
+
+.container label {
+    text-align: center;
+}
+
+.container input {
+    width: 50%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.container textarea {
+    width: 90%;
+    height: 200px;
+}
+
+.container h1 {
+    margin-left: 100px;
+}
+
+.container input {
+    padding: 10px;
+}
+
+.container .botao {
+    
+    width: 30%;
+    margin: 10px;
+    margin-bottom: 1px;
+}
+
+.container .botao button {
+    background-color: blue;
+    color: white;
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
+    width: 100px;
+    height: 20px;
+}
+
+.filtrar{
+    width: 430px;
+    padding: 30px;
+    border-width: 3px;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    margin: 30px auto;
+    background-color: white;
+    z-index: 1;
+    border-color: black;
+    border-style: solid;
+}
+
+.filtrar label {
+    text-align: center;
+}
+
+.filtrar input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.filtrar h1 {
+    margin-left: 100px;
+}
+
+.filtrar input {
+    padding: 10px;
+}
+
+.filtrar .botao {
+    margin: 10px;
+    margin-bottom: 1px;
+
+}
+
+.filtrar .botao button {
+    background-color: blue;
+    color: white;
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
+    width: 100px;
+    height: 20px;
+}
+
+
+.noticia {
+    width: 90%;
+    border-width: 3px;
+    background-color: white;
+    margin: 10px auto;
+    background-color: white;
+    z-index: 1;
+    border-color: black;
+    border-style: solid;
+}
+
+.noticia .titulo {
+    text-align: center;
+}
+
+.noticia p {
+    margin: 10px;
+}
+
+.dados {
+    display: flex;
+}
+
+.dados p {
+
+    margin: 10px;
+
+}
+
+.dados .edicao {
+    display: flex;
+    margin-left: auto;
+}
+
+.dados .edicao a {
+    color:white;
+    text-decoration: none;
+}
+
+.editar {
+    text-align: center;
+    width: 90px;
+    background-color: blue;
+}
+
+.deletar {
+    text-align: center;
+    width: 90px;
+    background-color: red;
+}
+
+footer {
+    background-color: red;
+    text-align: center;
+    color: black;
+    width: 100%;
+    padding: 40px 10px;
+
+}

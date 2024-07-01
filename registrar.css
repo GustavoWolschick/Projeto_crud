@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+header {
+    background-color: red;
+    padding: 15px;
+    justify-content: space-between;
+    display: flex;
+    text-align: center;
+}
+
+header a {
+    text-decoration: none;
+    transition: 0.2s;
+    cursor: pointer;
+    color: black;
+    font-size: 20px;
+}
+
+header .acesso {
+    display: flex;
+    justify-content: space-around;
+    width: 15%;
+    margin-left: auto;
+}
+
+.container {
+    width: 430px;
+    padding: 30px;
+    border-width: 3px;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    margin: 30px auto;
+    background-color: white;
+    z-index: 1;
+    border-color: black;
+    border-style: solid;
+    margin-top: 30px;
+}
+
+.container label {
+    text-align: center;
+}
+
+.container input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.container h1 {
+    text-align: center;
+}
+
+.container input {
+    padding: 10px;
+}
+
+.container .botao {
+    width: 350px;
+    padding: 10px 20px;
+    margin: 10px auto;
+}
+
+.container .botao input {
+    background-color: blue;
+    color: white;
+    border-style: solid;
+}
+
+.container .sexo {
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.adm{
+    display: flex;
+}
+
+footer {
+    background-color: red;
+    text-align: center;
+    color: black;
+    width: 100%;
+    padding: 40px 10px;
+}
