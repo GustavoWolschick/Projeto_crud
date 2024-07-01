@@ -63,7 +63,7 @@ function saudacao()
         <h1>Diário Digital</h1>
     </div>
     <div class="acesso">
-        <a href="registrar.php">Adicionar Usuário</a>
+        <a href="registrar_adm.php">Adicionar Usuário</a>
         <a href="logout.php">Logout</a>
     </div>
 </header>
