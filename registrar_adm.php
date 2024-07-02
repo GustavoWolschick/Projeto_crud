@@ -25,8 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <header>
     <a href="index.php">
-        <h1>Diário Digital</h1>
+        <h2>Diário Digital</h2>
     </a>
+    <di class="acesso">
+        <a href="crudUsuario.php">voltar</a>
+    </div>
 </header>
 
 <body>

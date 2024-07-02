@@ -26,6 +26,14 @@ header a {
     color: black;
 }
 
+header .acesso {
+    display: flex;
+    justify-content: space-around;
+    width: 15%;
+    margin-left: auto;
+    font-size: 20px;
+}
+
 .container {
     width: 430px;
     padding: 30px;

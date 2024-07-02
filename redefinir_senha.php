@@ -47,9 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="botao">
                 <input type="submit" value="Redefinir Senha">
             </div>
+            <p><?php echo $mensagem; ?></p>
         </form>
     </div>
-    <p><?php echo $mensagem; ?></p>
+
 </body>
 <footer>
     Copyright Gustavo R. Wolschick | 2024

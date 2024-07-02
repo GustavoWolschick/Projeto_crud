@@ -38,7 +38,7 @@ class Noticia {
 
         $query = "SELECT * FROM " . $this->table_name . " WHERE id_usu = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$id_usu]);
+        $stmt->execute([$id_usu]); 
         return $stmt;
     }
 
