@@ -27,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <a href="index.php">
         <h1>Diário Digital</h1>
     </a>
+    <div class="acesso">
+        <a href="index.php">voltar</a>
+    </div>
 </header>
 
 <body>

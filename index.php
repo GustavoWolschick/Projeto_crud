@@ -45,19 +45,18 @@ function saudacao()
 </header>
 
 <body>
-    <h2><?php echo saudacao(); ?>! Seja bem-vindo ao site que te deicha antenado</h2>
+    <h2><?php echo saudacao(); ?>! Seja bem-vindo ao site que te deixa antenado</h2>
     <div class="container">
         <h2>Filtrar notícia</h2>
         <form method="GET">
-            <input type="text" name="search" placeholder="Pesquisar notícia por titulo ou descrição"
-                value="<?php echo htmlspecialchars($search); ?>">
+            <input type="text" name="search" placeholder="Pesquisar notícia por titulo ou descrição" value="<?php echo htmlspecialchars($search); ?>">
             <div class="botao">
                 <button type="submit">Pesquisar</button>
             </div>
         </form>
     </div>
     <div class="noticias">
-        <?php while ($jornal = $dados_noticia->fetch(PDO::FETCH_ASSOC)): ?>
+        <?php while ($jornal = $dados_noticia->fetch(PDO::FETCH_ASSOC)) : ?>
             <div class="noticia">
                 <div class="titulo">
                     <h3><?php echo $jornal['titulo']; ?></h3>
@@ -72,14 +71,15 @@ function saudacao()
                     ?>
                     <p><strong>Data:</strong> <?php echo date('d/m/Y', strtotime($jornal['data'])); ?></p>
                 </div>
-               
+
             </div>
         <?php endwhile; ?>
     </div>
 
+    <footer>
+        Copyright Gustavo R. Wolschick | 2024
+    </footer>
 </body>
-<footer>
-    Copyright Gustavo R. Wolschick | 2024
-</footer>
+
 
 </html>
